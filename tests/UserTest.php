@@ -82,6 +82,37 @@
 
         function test_deleteAll()
         {
+            //Arrange
+            $name = "John";
+            $test_user = new User($name);
+            $test_user->save();
+
+            $name2 = "Jane";
+            $test_user2 = new User($name2);
+            $test_user2->save();
+            //Act
+            User::deleteAll();
+            $result = User::getAll();
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_update()
+        {
+            //Arrange
+            $name = "John";
+            $test_user = new User($name);
+            $test_user->save();
+            $new_name = "Nhoj";
+            //Act
+            $test_user->update($new_name);
+            $result = $test_user->getName();
+            //Assert
+            $this->assertEquals($new_name, $result);
+        }
+
+        function test_delete()
+        {
           //Arrange
           $name = "John";
           $test_user = new User($name);
@@ -91,10 +122,10 @@
           $test_user2 = new User($name2);
           $test_user2->save();
           //Act
-          User::deleteAll();
+          $test_user->delete();
           $result = User::getAll();
-          //Assert
-          $this->assertEquals([], $result);
+          //Arrange
+          $this->assertEquals([$test_user2], $result);
         }
     }
 ?>

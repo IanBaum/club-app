@@ -29,18 +29,18 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        static function getAll();
+        static function getAll()
         {
           $returned_users = $GLOBALS['DB']->query("SELECT * FROM users;");
           $users = array();
-          foreach($returned_users as $user) {
+          foreach($returned_users as $user)
+          {
               $name = $user['name'];
               $id = $user['id'];
               $new_user = new User($name, $id);
               array_push($users, $new_user);
           }
-          sort($users);
-          return $users
+          return $users;
         }
 
         static function deleteAll()

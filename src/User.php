@@ -47,5 +47,30 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM users;");
         }
+
+        static function find($search_id)
+        {
+            $found_user = null;
+            $users = User::getAll();
+            foreach($users as $user){
+                $user_id = $user->getId();
+                if($user_id = $search_id)
+                {
+                    $found_user = $user;
+                }
+            }
+            return $found_user;
+        }
+
+        function update ($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET name = '{$new_name}' WHERE id = {$this->Id()};");
+            $this->setName($new_name);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM users WHERE id {$this->getId()};");
+        }
     }
 ?>

@@ -46,5 +46,7 @@
             //Assert
             $this->assertEquals($new_name, $test_user->getName());
         }
+
+        
     }
 ?>

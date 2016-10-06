@@ -1,9 +1,9 @@
 <?php
-    class username{
+    class User{
         private $name;
         private $id;
 
-        function __contstruct($name, $id=null)
+        function __construct($name, $id=null)
         {
             $this->name = $name;
             $this->id = $id;
@@ -13,7 +13,6 @@
         {
             return $this->id;
         }
-
         function getName()
         {
             return $this->name;

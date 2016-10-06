@@ -72,5 +72,27 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
         }
+
+        function addClub($new_club)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO users_clubs (club_id, user_id) VALUES ({$new_club->getId()}, {$this->getId()});");
+        }
+
+        function getClubs()
+        {
+            $returned_clubs = $GLOBALS['DB']->query("SELECT clubs.* FROM clubs
+            JOIN users_clubs ON (users_clubs.user_id = users.id)
+            JOIN clubs ON (clubs.id = users_clubs.club_id)
+            WHERE users.id = {$this->getId()};");
+            $clubs = array();
+            foreach ($returned_clubs as $club)
+            {
+                $id = $club['id'];
+                $name = $club['name'];
+                $new_club = new Club($name,$id);
+                array_push($clubs, $new_club);
+            }
+            return $clubs;
+        }
     }
 ?>
